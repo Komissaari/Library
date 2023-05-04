@@ -24,33 +24,31 @@ namespace Library
         {
             InitializeComponent();
             //DGridBook.ItemsSource = LibraryEntities.GetContext().Books.ToList();
-            Manager.MainFrame = MainFrame;
-            
+
+
         }
 
-        private void Button_Click_Book(object sender, RoutedEventArgs e)
+        private void Button_Click_Autorization(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new PageBook());
+            if(TB_Login.Text == null || TB_Pass.Text == null)
+            {
+                MessageBox.Show("Заполните поля!");
+            }
+            else
+            {
+                Readers user = LibraryEntities1.GetContext().Readers.FirstOrDefault(p => p.Reader_Login == TB_Login.Text && (p.Reader_Password.ToString() ==
+                TB_Pass.Text));
+
+                if (user != null)
+                {
+                    Manager.Login = user.Reader_Login;
+                    AdminMenu wind = new AdminMenu();
+                    wind.Show();
+                    Hide();
+                }
+            }
         }
 
-        private void Button_Click_Authors(object sender, RoutedEventArgs e)
-        {
-            Manager.MainFrame.Navigate(new PageAuthors());
-        }
-
-        private void Button_Click_Publisher(object sender, RoutedEventArgs e)
-        {
-            Manager.MainFrame.Navigate(new PagePublisher());
-        }
-
-        private void Button_Click_Readers(object sender, RoutedEventArgs e)
-        {
-            Manager.MainFrame.Navigate(new PageReaders());
-        }
-
-        private void Button_Click_Extradition(object sender, RoutedEventArgs e)
-        {
-            Manager.MainFrame.Navigate(new PageExtradition());
-        }
+       
     }
 }

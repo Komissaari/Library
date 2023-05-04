@@ -26,11 +26,7 @@ namespace Library
         {
             InitializeComponent();
             if (selectedBooks != null) {
-                LibraryEntities1.GetContext().Entry(_currentBooks.ID_Publication).State = EntityState.Modified;
-                TB_ID_Publication.IsEnabled = false;
                 
-                // ComBoxAuthor.IsEnabled = false;
-                //ComBoxPublisher.IsEnabled = false;
                 _currentBooks = selectedBooks;
             }
             DataContext = _currentBooks;
